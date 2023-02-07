@@ -51,24 +51,30 @@ $hotels = [
     <title>PHP Hotel</title>
 </head>
 
-<body>
-    <div class="container">
-        <ul>
-            <?php foreach ($hotels[0] as $key => $hotel) : ?>
-                <li>
-                    <?= $key ?>
-                </li>
-            <?php endforeach; ?>
-            <?php foreach ($hotels as $key => $hotel) : ?>
-                <li>
-                    <?= $hotel['name'] ?>
-                    <?= $hotel['description'] ?>
-                    <?= $hotel['parking'] ?>
-                    <?= $hotel['vote'] ?>
-                    <?= $hotel['distance_to_center'] ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+<body class="bg-dark">
+    <div class="container pt-3">
+        <h1 class="text-white">Hotels</h1>
+        <hr class="text-secondary">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <?php foreach ($hotels[0] as $key => $hotel) : ?>
+                        <th scope="col"><?= ucfirst($key) ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($hotels as $hotel) : ?>
+                    <tr>
+                        <td> <?= $hotel['name'] ?></td>
+                        <td> <?= $hotel['description'] ?></td>
+                        <td> <?= ($hotel['parking']) ? '&#10003;' : '&#10007;' ?></td>
+                        <td> <?= $hotel['vote'] ?></td>
+                        <td> <?= $hotel['distance_to_center'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 
