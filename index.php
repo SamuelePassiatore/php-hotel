@@ -57,31 +57,49 @@ $parking = $_GET['parking'] ?? null;
 
 <body class="bg-dark">
     <div class="container pt-3">
+        <!-- Title -->
         <h1 class="text-white">Hotels</h1>
         <hr class="text-secondary">
+        <!-- Form -->
         <form action="" method="GET">
             <div class="form-group text-white">
-                <label for="parking">Parcheggio</label>
-                <select name="parking" id="parking" class="form-control w-25 d-inline-block mt-1 mb-2">
+                <!-- Select parking -->
+                <label for="parking">Seleziona</label>
+                <select name="parking" id="parking" class="form-select w-25 mt-1 mb-2">
                     <option value="">Tutti gli hotel</option>
                     <option value="true" <?= $parking == 'true' ? 'selected' : '' ?>>Con parcheggio</option>
                     <option value="false" <?= $parking == 'false' ? 'selected' : '' ?>>Senza parcheggio</option>
                 </select>
+                <!-- Select vote -->
+                <label for="vote">Voto</label>
+                <select name="vote" id="vote" class="form-select w-25 mt-1 mb-4">
+                    <option value="0">Tutti gli hotel</option>
+                    <option value="1">1 stella</option>
+                    <option value="2">2 stelle</option>
+                    <option value="3">3 stelle</option>
+                    <option value="4">4 stelle</option>
+                    <option value="5">5 stelle</option>
+                </select>
+                <!-- Buttons -->
                 <input class="btn btn-primary" type="submit" value="Filtra">
                 <a href="http://localhost/php-hotel" class="btn btn-danger">Annulla</a>
             </div>
         </form>
         <hr>
+        <!-- Table -->
         <table class="table table-dark">
             <thead>
                 <tr>
+                    <!-- Foreach keys -->
                     <?php foreach ($hotels[0] as $key => $hotel) : ?>
                         <th scope="col"><?= ucfirst($key) ?></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>
             <tbody>
+                <!-- Foreach value -->
                 <?php foreach ($hotels as $hotel) : ?>
+                    <!-- If filter parking -->
                     <?php if (!$parking || $hotel['parking'] === ($parking == 'true')) : ?>
                         <tr>
                             <td> <?= $hotel['name'] ?></td>
