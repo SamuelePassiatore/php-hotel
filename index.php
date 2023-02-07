@@ -37,6 +37,10 @@ $hotels = [
         'distance_to_center' => 50
     ],
 ];
+
+// Recupero la scelta dell'utente nella select
+$parking = $_GET['parking'] ?? null;
+
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +59,18 @@ $hotels = [
     <div class="container pt-3">
         <h1 class="text-white">Hotels</h1>
         <hr class="text-secondary">
+        <form action="" method="GET">
+            <div class="form-group text-white">
+                <label for="parking">Parcheggio</label>
+                <select name="parking" id="parking" class="form-control w-25 d-inline-block mt-1 mb-2">
+                    <option value="">Tutti gli hotel</option>
+                    <option value="true">Con parcheggio</option>
+                    <option value="false">Senza parcheggio</option>
+                </select>
+                <input class="btn btn-primary" type="submit" value="Filtra">
+            </div>
+        </form>
+        <hr>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -65,13 +81,15 @@ $hotels = [
             </thead>
             <tbody>
                 <?php foreach ($hotels as $hotel) : ?>
-                    <tr>
-                        <td> <?= $hotel['name'] ?></td>
-                        <td> <?= $hotel['description'] ?></td>
-                        <td> <?= ($hotel['parking']) ? '&#10003;' : '&#10007;' ?></td>
-                        <td> <?= $hotel['vote'] ?></td>
-                        <td> <?= $hotel['distance_to_center'] ?></td>
-                    </tr>
+                    <?php if (!$parking || $hotel['parking'] === ($parking == 'true')) : ?>
+                        <tr>
+                            <td> <?= $hotel['name'] ?></td>
+                            <td> <?= $hotel['description'] ?></td>
+                            <td> <?= ($hotel['parking']) ? '&#10003;' : '&#10007;' ?></td>
+                            <td> <?= $hotel['vote'] ?></td>
+                            <td> <?= $hotel['distance_to_center'] ?></td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>
