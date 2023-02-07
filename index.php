@@ -38,8 +38,9 @@ $hotels = [
     ],
 ];
 
-// Recupero la scelta dell'utente nella select
+// Recupero la scelta dell'utente nelle select
 $parking = $_GET['parking'] ?? null;
+$vote = $_GET['vote'] ?? null;
 
 ?>
 
@@ -74,11 +75,11 @@ $parking = $_GET['parking'] ?? null;
                 <label for="vote">Voto</label>
                 <select name="vote" id="vote" class="form-select w-25 mt-1 mb-4">
                     <option value="0">Tutti gli hotel</option>
-                    <option value="1">1 stella</option>
-                    <option value="2">2 stelle</option>
-                    <option value="3">3 stelle</option>
-                    <option value="4">4 stelle</option>
-                    <option value="5">5 stelle</option>
+                    <option value="1" <?= $vote == '1' ? 'selected' : '' ?>>1 stella</option>
+                    <option value="2" <?= $vote == '2' ? 'selected' : '' ?>>2 stelle</option>
+                    <option value="3" <?= $vote == '3' ? 'selected' : '' ?>>3 stelle</option>
+                    <option value="4" <?= $vote == '4' ? 'selected' : '' ?>>4 stelle</option>
+                    <option value="5" <?= $vote == '5' ? 'selected' : '' ?>>5 stelle</option>
                 </select>
                 <!-- Buttons -->
                 <input class="btn btn-primary" type="submit" value="Filtra">
@@ -100,7 +101,7 @@ $parking = $_GET['parking'] ?? null;
                 <!-- Foreach value -->
                 <?php foreach ($hotels as $hotel) : ?>
                     <!-- If filter parking -->
-                    <?php if (!$parking || $hotel['parking'] === ($parking == 'true')) : ?>
+                    <?php if ((!$parking || $hotel['parking'] === ($parking == 'true')) && (!$vote || $hotel['vote'] >= $vote)) : ?>
                         <tr>
                             <td> <?= $hotel['name'] ?></td>
                             <td> <?= $hotel['description'] ?></td>
