@@ -64,10 +64,11 @@ $parking = $_GET['parking'] ?? null;
                 <label for="parking">Parcheggio</label>
                 <select name="parking" id="parking" class="form-control w-25 d-inline-block mt-1 mb-2">
                     <option value="">Tutti gli hotel</option>
-                    <option value="true">Con parcheggio</option>
-                    <option value="false">Senza parcheggio</option>
+                    <option value="true" <?= $parking == 'true' ? 'selected' : '' ?>>Con parcheggio</option>
+                    <option value="false" <?= $parking == 'false' ? 'selected' : '' ?>>Senza parcheggio</option>
                 </select>
                 <input class="btn btn-primary" type="submit" value="Filtra">
+                <a href="http://localhost/php-hotel" class="btn btn-danger">Annulla</a>
             </div>
         </form>
         <hr>
