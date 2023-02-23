@@ -107,7 +107,7 @@ $vote = $_GET['vote'] ?? null;
                             <td> <?= $hotel['description'] ?></td>
                             <td> <?= ($hotel['parking']) ? '&#10003;' : '&#10007;' ?></td>
                             <td> <?= $hotel['vote'] ?></td>
-                            <td> <?= $hotel['distance_to_center'] ?></td>
+                            <td> <?= $hotel['distance_to_center'] ?> Km</td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
